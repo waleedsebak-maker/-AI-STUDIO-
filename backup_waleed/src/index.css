@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Ensure official document forms use standard RGB/HEX colors for html2canvas/PDF compatibility */
+.official-government-paper {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.official-government-paper table {
+  border-color: #000000 !important;
+}
+
+.official-government-paper th,
+.official-government-paper td {
+  border-color: #000000 !important;
+}
+
+@layer utilities {
+  /* Print Optimization for Unified 7-Page PDF */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 8mm 6mm;
+    }
+
+    body {
+      background-color: white !important;
+      color: black !important;
+      font-size: 11pt !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .no-print, 
+    nav, 
+    header, 
+    footer,
+    button {
+      display: none !important;
+    }
+
+    #officialSevenPagesContainer {
+      display: block !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .official-government-paper {
+      display: block !important;
+      visibility: visible !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: 270mm !important;
+      height: auto !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      margin: 0 0 15mm 0 !important;
+      padding: 10mm 8mm !important;
+      border: 1.5px solid black !important;
+      box-shadow: none !important;
+      background: white !important;
+      color: black !important;
+    }
+
+    .official-government-paper:last-child {
+      page-break-after: avoid !important;
+      break-after: avoid !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}

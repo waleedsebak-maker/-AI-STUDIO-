@@ -1,0 +1,6 @@
+{
+  "name": "محلل وخبير تصاريح النقل السياحي",
+  "description": "منصة تحليل معماري واستشاري شامل لمشروع مولّد تصاريح النقل السياحي المصري وتقديمه لمجلس خبراء متخصصين",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

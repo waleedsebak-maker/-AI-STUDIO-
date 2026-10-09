@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تصاريح النقل السياحي</title><link rel="stylesheet" href="/static/app.css">
+<style>
+.history-item{
+  width:100%;
+  text-align:right;
+  direction:rtl;
+  cursor:pointer;
+  padding:10px;
+  margin:4px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  background:#fff;
+  color:#111;
+  font-size:15px;
+}
+.history-item:hover{
+  background:#f2f2f2;
+}
+</style>
+
+<style id="history964Style">
+#historyBox{
+  margin-top:20px;
+}
+
+#historyBox h2{
+  font-weight:800;
+}
+
+#history{
+  list-style:none;
+  padding:0;
+  margin:10px 0;
+}
+
+.history-card{
+  display:block;
+  background:#fff;
+  border:2px solid #bbb;
+  border-radius:10px;
+  padding:12px;
+  margin:8px 0;
+  direction:rtl;
+  text-align:right;
+}
+
+.history-title{
+  font-size:17px;
+  font-weight:800;
+  color:#111;
+  margin-bottom:5px;
+}
+
+.history-info{
+  font-size:14px;
+  color:#333;
+  margin-bottom:10px;
+}
+
+.history-open{
+  width:100%;
+  padding:11px;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:800;
+  background:#eee;
+  color:#111;
+}
+
+.history-open:active{
+  transform:scale(.99);
+}
+
+.history-empty{
+  padding:12px;
+  text-align:center;
+  direction:rtl;
+}
+</style>
+</head>
+<body><main class="shell"><section class="card"><header><h1>مولّد تصاريح النقل السياحي</h1><p>إنشاء ملف PDF رسمي من 7 صفحات باستخدام الاستمارات المعتمدة.</p></header>
+<form id="permitForm" enctype="multipart/form-data">
+<div class="section">
+<h2>الأساسيات</h2>
+<div class="quick" id="quickBtns"></div>
+<div class="grid">
+<label>الشركة<select name="company" id="company"><option value="unlimited">ان ليميتد ايجيبت ترافيل — 2257</option><option value="memory">ميمورى تريب تورز — 1586</option></select></label>
+<label>نوع التصريح<select name="permit" id="permit"></select></label>
+<label>رقم الملف<input name="file_no" placeholder="CH202609-14GZL" required></label>
+<input type="hidden" id="manualPax" name="manual_pax" value=""><label>العدد<input name="pax" id="pax" type="number" min="1" placeholder="بيتحسب من الإكسل"></label>
+</div>
+<p class="hint" id="hurghadaNote" hidden>الغردقة: 7 ورقات في PDF واحد — 3 إخطارات + روم ليست واحدة + إدارة البرامج + إخطار شرطة الأقصر + الورقة الإضافية.</p>
+</div>
+<div class="section"><h2>المرشد والتواريخ</h2><div class="grid">
+<label>اسم المرشد الكامل
+<select name="guide" id="guide" required>
+<option value="">اختر المرشد</option>
+</select>
+</label>
+<label>هاتف المرشد
+<select name="phone" id="phone">
+<option value="">اختر الهاتف</option>
+</select>
+</label>
+<label>تاريخ الرحلة<input name="trip_date" type="date" required></label>
+<label>تحريراً في<input name="issue_date" type="date"></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+<button type="button" id="addGuideBtn">إضافة مرشد ورقم جديد</button>
+</div>
+
+</div>
+<div class="section"><h2>البرنامج والفنادق</h2>
+<label>البرنامج / أماكن الإقامة<textarea name="program" rows="3" required placeholder="زعفرانه – خان – ازهر – مصر القديمه – عشاء – الفندق"></textarea></label>
+<div class="grid">
+<label>فندق الانطلاق<input name="hotel_from" id="hotel_from" list="hotelFromList"></label>
+<label>فندق الوصول<input name="hotel_to" id="hotel_to" list="hotelToList"></label>
+</div>
+<datalist id="hotelFromList"></datalist><datalist id="hotelToList"></datalist>
+</div>
+
+<div class="section" id="transportSection">
+  <h2>بيانات النقل</h2>
+  <p style="margin:0 0 12px;color:#777;font-size:14px;">
+    هذه البيانات اختيارية. اترك الحقول فارغة إذا لم تكن متوفرة.
+  </p>
+
+  <div class="grid">
+    <label>
+      شركة النقل
+      <input name="transport_company" id="transport_company"
+             placeholder="مثال: ميد إيجيبت للنقل السياحي">
+    </label>
+
+    <label>
+      رقم العربية
+      <input name="vehicle_number" id="vehicle_number"
+             placeholder="مثال: EG 1234">
+    </label>
+
+    <label>
+      اسم السائق
+      <input name="driver_name" id="driver_name"
+             placeholder="اسم السائق">
+    </label>
+
+    <label>
+      تليفون السائق
+      <input name="driver_phone" id="driver_phone"
+             inputmode="tel"
+             placeholder="رقم تليفون السائق">
+    </label>
+  </div>
+</div>
+
+<div class="section"><h2>المرفقات</h2>
+<p class="hint"><a href="/api/rooming-template">تنزيل نموذج النيم ليست Excel</a></p>
+<div class="grid">
+<label>النيم ليست Excel<input name="rooming" id="rooming" type="file" accept=".xlsx,.xls" required></label>
+<label id="roomShotRow" hidden>سكرين النيم ليست <small>للغردقة ميموري فقط — بدل الإكسل</small><input name="rooming_img" id="rooming_img" type="file" accept="image/*"></label>
+<label>صورة إدارة البرامج <small id="programHint">(اختياري لغير الغردقة)</small><input name="program_image" id="program_image" type="file" accept="image/*"></label>
+</div>
+<label id="extraRow" hidden>الورقة الإضافية <small>صورة أو PDF — صفحة واحدة تندرج آخر الملف</small><input name="extra_page" id="extra_page" type="file" accept="image/*"></labe
